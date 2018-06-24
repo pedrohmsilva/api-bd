@@ -11,6 +11,7 @@ include "src/Cela.php";
 include "src/Prisioneiro.php";
 include "src/Familiar.php";
 include "src/Servidor.php";
+include "src/Pena.php";
 
 include "request.php";
 
@@ -26,24 +27,28 @@ $route->add('unidades/criar', 'UnidadePrisional', 'criar');
 $route->add('unidades/alterar', 'UnidadePrisional', 'alterar');
 $route->add('unidades/remover', 'UnidadePrisional', 'remover');
 $route->add('unidades/buscar', 'UnidadePrisional', 'buscar');
+$route->add('unidades/pavilhoes', 'UnidadePrisional', 'pavilhoes');
 
 $route->add('fornecedores/listar', 'Fornecedor', 'listar');
 $route->add('fornecedores/criar', 'Fornecedor', 'criar');
 $route->add('fornecedores/alterar', 'Fornecedor', 'alterar');
 $route->add('fornecedores/remover', 'Fornecedor', 'remover');
 $route->add('fornecedores/buscar', 'Fornecedor', 'buscar');
+$route->add('fornecedores/vendas', 'Fornecedor', 'vendas');
 
 $route->add('pavilhoes/listar', 'Pavilhao', 'listar');
 $route->add('pavilhoes/criar', 'Pavilhao', 'criar');
 $route->add('pavilhoes/alterar', 'Pavilhao', 'alterar');
 $route->add('pavilhoes/remover', 'Pavilhao', 'remover');
 $route->add('pavilhoes/buscar', 'Pavilhao', 'buscar');
+$route->add('pavilhoes/blocos', 'Pavilhao', 'blocos');
 
 $route->add('blocos/listar', 'Bloco', 'listar');
 $route->add('blocos/criar', 'Bloco', 'criar');
 $route->add('blocos/alterar', 'Bloco', 'alterar');
 $route->add('blocos/remover', 'Bloco', 'remover');
 $route->add('blocos/buscar', 'Bloco', 'buscar');
+$route->add('blocos/celas', 'Bloco', 'celas');
 
 $route->add('celas/listar', 'Cela', 'listar');
 $route->add('celas/criar', 'Cela', 'criar');
@@ -69,6 +74,12 @@ $route->add('servidores/criar', 'Servidor', 'criar');
 $route->add('servidores/alterar', 'Servidor', 'alterar');
 $route->add('servidores/remover', 'Servidor', 'remover');
 $route->add('servidores/buscar', 'Servidor', 'buscar');
+
+$route->add('penas/listar', 'Pena', 'listar');
+$route->add('penas/criar', 'Pena', 'criar');
+$route->add('penas/alterar', 'Pena', 'alterar');
+$route->add('penas/remover', 'Pena', 'remover');
+$route->add('penas/buscar', 'Pena', 'buscar');
 
 $result = $route->submit();
 

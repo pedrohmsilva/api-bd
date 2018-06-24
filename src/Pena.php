@@ -32,19 +32,17 @@ class Pena
     {
         $sql = 
             "INSERT INTO pena(" . 
-                "cpf, " .
-                "nome, " .
-                "data_nascimento, " .
-                "cargo, " .
-                "salario, " .
-                "fk_pavilhao" .
+                "codigo_penal, " .
+                "area_judicial, " .
+                "descricao, " .
+                "duracao_max, " .
+                "duracao_min" .
             ") VALUES(" .
-                "'" . $params['cpf'] . "', " .
-                "'" . $params['nome'] . "', " .
-                "date('" . $params['data_nascimento'] . "'), " .
-                "'" . $params['cargo'] . "', " .
-                "" . $params['salario'] . ", " .
-                "" . $params['fk_pavilhao'] . "" .
+                "'" . $params['codigo_penal'] . "', " .
+                "'" . $params['area_judicial'] . "', " .
+                "'" . $params['descricao'] . "', " .
+                "" . $params['duracao_max'] . ", " .
+                "" . $params['duracao_min'] . "" .
             ")";
 
         $conn = new Connection();
@@ -55,22 +53,18 @@ class Pena
 
     public function alterar($params)
     {
-        $sql = "UPDATE servidor set ";
+        $sql = "UPDATE pena set ";
         
         $array_values = [];
         foreach ($params as $key => $value) {
-            if ($key == 'data_nascimento') {
-                $array_values[] = $key."=date('".$value."')";
-                continue;
-            }
-            if ($key != 'cpf') {
+            if ($key != 'codigo_penal') {
                 $array_values[] = $key."=".(in_array($key, self::$text) ? "'".$value."'" : $value);
             }
         }
         
         $values = implode(',', $array_values);
-        $sql .= $values . " WHERE cpf = ";
-        $sql .= $params['cpf'];
+        $sql .= $values . " WHERE codigo_penal = ";
+        $sql .= $params['codigo_penal'];
 
         $conn = new Connection();
         return json_encode(
@@ -80,7 +74,7 @@ class Pena
 
     public function remover($params)
     {
-        $sql = "delete from servidor where cpf = " . $params['cpf'];
+        $sql = "delete from pena where codigo_penal = " . $params['codigo_penal'];
 
         $conn = new Connection();
         return json_encode(
