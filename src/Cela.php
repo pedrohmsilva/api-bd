@@ -29,7 +29,13 @@ class Cela
 
     public function buscar($params)
     {
-        $sql = "SELECT * FROM cela WHERE id_cela = " . $params['id_cela'];
+        $sql = "SELECT c.id_cela, c.fk_bloco, c.codigo, c.quantidade_max, c.tipo," .
+               " b.numero as numero_bloco, b.andar as andar_bloco," .
+               " p.id_pavilhao as pavilhao, p.numero as numero_pavilhao, p.funcao as funcao_pavilhao," .
+               " u.codigo as codigo_unidade, u.nome, u.rua, u.bairro, u.cidade, u.uf, u.cep" .
+               " FROM cela c, bloco b, pavilhao p, unidade_prisional u" .
+               " WHERE c.fk_bloco = b.id_bloco AND b.fk_pavilhao = p.id_pavilhao AND p.fk_unid_prisional = u.codigo" .
+               " AND id_cela = " . $params['id_cela'];
         $conn = new Connection();
         return json_encode(
             $conn->get($sql)

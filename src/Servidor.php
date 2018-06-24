@@ -21,7 +21,12 @@ class Servidor
 
     public function buscar($params)
     {
-        $sql = "SELECT * FROM servidor WHERE cpf = " . $params['cpf'];
+        $sql = "SELECT s.cpf, s.nome, s.data_nascimento, s.cargo, s.salario," .
+               " p.id_pavilhao, p.numero as numero_pavilhao, p.funcao as funcao_pavilhao," .
+               " u.codigo as codigo_unidade, u.nome as nome_unidade, u.rua, u.bairro, u.cidade, u.uf, u.cep" .
+               " FROM servidor s, pavilhao p, unidade_prisional u".
+               " WHERE s.fk_pavilhao = p.id_pavilhao AND p.fk_unid_prisional = u.codigo" .
+               " AND s.cpf = " . $params['cpf'];
         $conn = new Connection();
         return json_encode(
             $conn->get($sql)
