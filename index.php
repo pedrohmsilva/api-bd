@@ -15,6 +15,7 @@ include "src/Servidor.php";
 include "request.php";
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST");
 
 $route = new Route();
 $route->add('/', null, null);
@@ -49,6 +50,7 @@ $route->add('celas/criar', 'Cela', 'criar');
 $route->add('celas/alterar', 'Cela', 'alterar');
 $route->add('celas/remover', 'Cela', 'remover');
 $route->add('celas/buscar', 'Cela', 'buscar');
+$route->add('celas/prisioneiros', 'Cela', 'prisioneiros');
 
 $route->add('prisioneiros/listar', 'Prisioneiro', 'listar');
 $route->add('prisioneiros/criar', 'Prisioneiro', 'criar');
