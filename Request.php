@@ -24,16 +24,18 @@ class Request
         // ];
 
         $send = [
-            'cnpj' => '1010',
-            'nome_empresa' => 'Novo',
-            'item_ofertado' => 'Teste',
+            'valor' => '10',
+            'quantidade' => '20',
+            'data_venda' => '2018-06-23',
+            'fk_unid_prisional' => 1,
+            'fk_fornecedor' => '1010'
         ];
 
         // $send = [
         //     'id_pavilhao' => 2
         // ];
 
-        $url = 'http://localhost/prision/bd-api/fornecedores/criar';
+        $url = 'http://localhost/prision/bd-api/fornecedores/criar-venda';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

@@ -26,6 +26,15 @@ class Pavilhao
         );
     }
 
+    public function blocos($params)
+    {
+        $sql = "SELECT * FROM bloco WHERE fk_pavilhao = " . $params['id_pavilhao'];
+        $conn = new Connection();
+        return json_encode(
+            $conn->get($sql)
+        );
+    }
+
     public function criar($params)
     {
         $sql = 

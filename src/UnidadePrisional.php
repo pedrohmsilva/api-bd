@@ -31,6 +31,15 @@ class UnidadePrisional
         );
     }
 
+    public function pavilhoes($params)
+    {
+        $sql = "SELECT * FROM pavilhao WHERE fk_unid_prisional = " . $params['codigo'];
+        $conn = new Connection();
+        return json_encode(
+            $conn->get($sql)
+        );
+    }
+
     public function criar($params)
     {
         $sql = 

@@ -24,6 +24,15 @@ class Bloco
         );
     }
 
+    public function celas($params)
+    {
+        $sql = "SELECT * FROM cela WHERE fk_bloco = " . $params['id_bloco'];
+        $conn = new Connection();
+        return json_encode(
+            $conn->get($sql)
+        );
+    }
+
     public function criar($params)
     {
         $sql = 

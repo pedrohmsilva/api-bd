@@ -17,6 +17,16 @@ class Cela
         );
     }
 
+    public function prisioneiros($params)
+    {
+        $sql = "SELECT * FROM prisioneiro WHERE" .
+               " fk_cela = " . $params['id_cela'];
+        $conn = new Connection();
+        return json_encode(
+            $conn->get($sql)
+        );
+    }
+
     public function buscar($params)
     {
         $sql = "SELECT * FROM cela WHERE id_cela = " . $params['id_cela'];

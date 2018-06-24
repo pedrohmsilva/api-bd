@@ -28,6 +28,15 @@ class Fornecedor
         );
     }
 
+    public function vendas($params)
+    {
+        $sql = "SELECT * FROM vendas WHERE fk_fornecedor = " . $params['cnpj'];
+        $conn = new Connection();
+        return json_encode(
+            $conn->get($sql)
+        );
+    }
+
     public function criar($params)
     {
         $sql = 
@@ -39,6 +48,29 @@ class Fornecedor
                 "'" . $params['cnpj'] . "', " .
                 "'" . $params['nome_empresa'] . "', " .
                 "'" . $params['item_ofertado'] . "'" .
+            ")";
+
+        $conn = new Connection();
+        return json_encode(
+            $conn->post($sql)
+        );
+    }
+
+    public function criar_venda($params)
+    {
+        $sql = 
+            "INSERT INTO vendas(" . 
+                "valor, " .
+                "quantidade, " .
+                "data_venda, " .
+                "fk_unid_prisional, " .
+                "fk_fornecedor" .
+            ") VALUES(" .
+                "" . $params['valor'] . ", " .
+                "" . $params['quantidade'] . ", " .
+                "date('" . $params['data_venda'] . "'), " .
+                "" . $params['fk_unid_prisional'] . ", " .
+                "'" . $params['fk_fornecedor'] . "'" .
             ")";
 
         $conn = new Connection();

@@ -34,6 +34,7 @@ $route->add('fornecedores/criar', 'Fornecedor', 'criar');
 $route->add('fornecedores/alterar', 'Fornecedor', 'alterar');
 $route->add('fornecedores/remover', 'Fornecedor', 'remover');
 $route->add('fornecedores/buscar', 'Fornecedor', 'buscar');
+$route->add('fornecedores/criar-venda', 'Fornecedor', 'criar_venda');
 $route->add('fornecedores/vendas', 'Fornecedor', 'vendas');
 
 $route->add('pavilhoes/listar', 'Pavilhao', 'listar');
@@ -62,6 +63,10 @@ $route->add('prisioneiros/criar', 'Prisioneiro', 'criar');
 $route->add('prisioneiros/alterar', 'Prisioneiro', 'alterar');
 $route->add('prisioneiros/remover', 'Prisioneiro', 'remover');
 $route->add('prisioneiros/buscar', 'Prisioneiro', 'buscar');
+$route->add('prisioneiros/criar-pena', 'Prisioneiro', 'criar_pena');
+$route->add('prisioneiros/penas', 'Prisioneiro', 'penas');
+$route->add('prisioneiros/familiares', 'Prisioneiro', 'familiares');
+
 
 $route->add('familiares/listar', 'Familiar', 'listar');
 $route->add('familiares/criar', 'Familiar', 'criar');

@@ -61,6 +61,47 @@ class Prisioneiro
         );
     }
 
+    public function criar_pena($params)
+    {
+        $sql = 
+            "INSERT INTO cumprimento_pena(" . 
+                "fk_prisioneiro, " .
+                "fk_pena, " .
+                "data_inicio, " .
+                "data_termino" .
+            ") VALUES(" .
+                "'" . $params['fk_prisioneiro'] . "', " .
+                "'" . $params['fk_pena'] . "', " .
+                "date('" . $params['data_inicio'] . "'), " .
+                "date('" . $params['data_termino'] . "')" .
+            ")";
+        
+        $conn = new Connection();
+        return json_encode(
+            $conn->post($sql)
+        );
+    }
+
+    public function penas($params)
+    {
+        $sql = "SELECT codigo_penal, area_judicial, descricao, duracao_max, duracao_min, data_inicio, data_termino" .
+               " FROM pena, cumprimento_pena" .
+               " WHERE fk_prisioneiro = " . $params['fk_prisioneiro'];
+        $conn = new Connection();
+        return json_encode(
+            $conn->get($sql)
+        );
+    }
+
+    public function familiares($params)
+    {
+        $sql = "SELECT * FROM familiar WHERE fk_prisioneiro = " . $params['fk_prisioneiro'];
+        $conn = new Connection();
+        return json_encode(
+            $conn->get($sql)
+        );
+    }
+
     public function alterar($params)
     {
         $sql = "UPDATE prisioneiro set ";
