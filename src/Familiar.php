@@ -23,7 +23,12 @@ class Familiar
 
     public function buscar($params)
     {
-        $sql = "SELECT * FROM familiar WHERE cpf = " . $params['cpf'];
+        $sql = "SELECT f.cpf as cpf_familiar, f.rg as rg_familiar, f.nome as nome_familiar," .
+               " f.data_nascimento as data_nascimento_familiar, f.parentesco as parentesco_familiar," . 
+               " p.cpf as cpf_prisioneiro, p.rg as rg_prisioneiro, p.nome as nome_prisioneiro," .
+               " p.data_nascimento as data_nascimento_prisioneiro, p.observacoes_medicas" .
+               " FROM familiar f, prisioneiro p" .
+               " WHERE f.cpf = " . $params['cpf'];
         $conn = new Connection();
         return json_encode(
             $conn->get($sql)

@@ -19,7 +19,11 @@ class Pavilhao
 
     public function buscar($params)
     {
-        $sql = "SELECT * FROM pavilhao WHERE id_pavilhao = " . $params['id_pavilhao'];
+        $sql = "SELECT p.id_pavilhao, p.fk_unid_prisional, p.numero, p.funcao," .
+               " u.codigo as codigo_unidade, u.nome as nome_unidade, u.rua, u.bairro, u.cidade, u.uf, u.cep" .
+               " FROM pavilhao p, unidade_prisional u" .
+               " WHERE p.fk_unid_prisional = u.codigo" .
+               " AND id_pavilhao = " . $params['id_pavilhao'];
         $conn = new Connection();
         return json_encode(
             $conn->get($sql)
