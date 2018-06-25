@@ -6,7 +6,9 @@ class UnidadePrisional
 {
     static $text = [
         'nome',
-        'rua',
+        'tipo_logradouro',
+        'logradouro',
+        'num',
         'bairro',
         'cidade',
         'uf',
@@ -45,14 +47,18 @@ class UnidadePrisional
         $sql = 
             "INSERT INTO unidade_prisional(" . 
                 "nome, " .
-                "rua, " .
+                "tipo_logradouro, " .
+                "logradouro, " .
+                "num, " .
                 "bairro, " .
                 "cidade, " .
                 "uf, " .
                 "cep" .
             ") VALUES(" .
                 "'" . $params['nome'] . "', " .
-                "'" . $params['rua'] . "', " .
+                "'" . $params['tipo_logradouro'] . "', " .
+                "'" . $params['logradouro'] . "', " .
+                "'" . $params['num'] . "', " .
                 "'" . $params['bairro'] . "', " .
                 "'" . $params['cidade'] . "', " .
                 "'" . $params['uf'] . "', " .
