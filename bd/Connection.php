@@ -16,6 +16,7 @@ class Connection
         if (self::$conn->connect_error) {
             die("Falha de conexão: " . self::$conn->connect_error);
         }
+        self::$conn->set_charset("utf8");
     }
 
     public function __destruct()
