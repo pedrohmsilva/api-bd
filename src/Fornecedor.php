@@ -31,6 +31,9 @@ class Fornecedor
     public function vendas($params)
     {
         $sql = "SELECT * FROM vendas WHERE fk_fornecedor = " . $params['cnpj'];
+        if (isset($params['fk_unid_prisional'])) {
+            $sql .= " AND fk_unid_prisional = " . $params['fk_unid_prisional'];
+        }
         $conn = new Connection();
         return json_encode(
             $conn->get($sql)
