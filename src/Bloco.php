@@ -22,7 +22,9 @@ class Bloco
                " u.codigo as codigo_unidade, u.nome as nome_unidade, u.logradouro, u.num, u.bairro, u.cidade, u.uf, u.cep" .
                " FROM bloco b, pavilhao p, unidade_prisional u" .
                " WHERE b.fk_numero_pavilhao = p.numero" .
-               " AND p.fk_unid_prisional = u.codigo";
+               " AND p.fk_unid_prisional = u.codigo" .
+               " AND b.fk_numero_pavilhao = " . $params['fk_numero_pavilhao'] .
+               " AND b.numero = " . $params['numero'];
         
         
         $conn = new Connection();

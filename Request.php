@@ -24,18 +24,20 @@ class Request
         // ];
 
         $send = [
-            'valor' => '10',
-            'quantidade' => '20',
-            'data_venda' => '2018-06-23',
-            'fk_unid_prisional' => 1,
-            'fk_fornecedor' => '1010'
+            'cpf' => '2',
+            'nome' => 'Servidor 2',
+            'data_nascimento' => '1910-01-01',
+            'cargo' => 'Teste',
+            'salario' => 150.2,
+            'fk_codigo_unidade' => '1',
+            'fk_numero_pavilhao' => '1'
         ];
 
         // $send = [
         //     'id_pavilhao' => 2
         // ];
 
-        $url = 'http://localhost/prision/bd-api/fornecedores/criar-venda';
+        $url = 'http://localhost/prision/bd-api/servidores/remover';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
