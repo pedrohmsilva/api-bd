@@ -22,10 +22,11 @@ class Servidor
     public function buscar($params)
     {
         $sql = "SELECT s.cpf, s.nome, s.data_nascimento, s.cargo, s.salario," .
-               " p.id_pavilhao, p.numero as numero_pavilhao, p.funcao as funcao_pavilhao," .
-               " u.codigo as codigo_unidade, u.nome as nome_unidade, u.rua, u.bairro, u.cidade, u.uf, u.cep" .
+               " p.numero as numero_pavilhao, p.funcao as funcao_pavilhao," .
+               " u.codigo as codigo_unidade, u.nome as nome_unidade, u.tipo_logradouro, u.logradouro, u.num, u.bairro, u.cidade, u.uf, u.cep" .
                " FROM servidor s, pavilhao p, unidade_prisional u".
-               " WHERE s.fk_pavilhao = p.id_pavilhao AND p.fk_unid_prisional = u.codigo" .
+               " WHERE s.fk_numero_pavilhao = p.numero AND s.fk_codigo_unidade = p.fk_unid_prisional" .
+               " AND p.fk_unid_prisional =  u.codigo" .
                " AND s.cpf = " . $params['cpf'];
         $conn = new Connection();
         return json_encode(
@@ -42,14 +43,16 @@ class Servidor
                 "data_nascimento, " .
                 "cargo, " .
                 "salario, " .
-                "fk_pavilhao" .
+                "fk_codigo_unidade," .
+                "fk_numero_pavilhao" .
             ") VALUES(" .
                 "'" . $params['cpf'] . "', " .
                 "'" . $params['nome'] . "', " .
                 "date('" . $params['data_nascimento'] . "'), " .
                 "'" . $params['cargo'] . "', " .
                 "" . $params['salario'] . ", " .
-                "" . $params['fk_pavilhao'] . "" .
+                "" . $params['fk_codigo_unidade'] . ", " .
+                "" . $params['fk_numero_pavilhao'] . "" .
             ")";
 
         $conn = new Connection();
