@@ -26,9 +26,9 @@ class Prisioneiro
                " pavilhao.numero as pavilhao, unidade_prisional.codigo as codigo_unidade, unidade_prisional.nome as nome_unidade" .
                " FROM prisioneiro, cela, bloco, pavilhao, unidade_prisional" .
                " WHERE cpf = " . $params['cpf'] .
-               " AND cela.id_cela = prisioneiro.fk_cela" .
-               " AND bloco.id_bloco = cela.fk_bloco" .
-               " AND pavilhao.id_pavilhao = bloco.fk_pavilhao" .
+               " AND cela.codigo = prisioneiro.fk_cela" .
+               " AND bloco.numero = cela.fk_numero_bloco AND bloco.fk_numero_pavilhao = cela.fk_numero_pavilhao" .
+               " AND pavilhao.numero = bloco.fk_numero_pavilhao AND pavilhao.fk_unid_prisional = bloco.fk_codigo_unidade" .
                " AND unidade_prisional.codigo = pavilhao.fk_unid_prisional";
         $conn = new Connection();
         return json_encode(
