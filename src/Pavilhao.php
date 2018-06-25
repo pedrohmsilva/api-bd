@@ -19,11 +19,12 @@ class Pavilhao
 
     public function buscar($params)
     {
-        $sql = "SELECT p.id_pavilhao, p.fk_unid_prisional, p.numero, p.funcao," .
-               " u.codigo as codigo_unidade, u.nome as nome_unidade, u.rua, u.bairro, u.cidade, u.uf, u.cep" .
+        $sql = "SELECT p.numero, p.funcao, p.fk_unid_prisional," .
+               " u.codigo as codigo_unidade, u.nome as nome_unidade, u.tipo_logradouro, u.logradouro, u.num, u.bairro, u.cidade, u.uf, u.cep" .
                " FROM pavilhao p, unidade_prisional u" .
                " WHERE p.fk_unid_prisional = u.codigo" .
-               " AND id_pavilhao = " . $params['id_pavilhao'];
+               " AND numero = " . $params['numero'] .
+               " AND fk_unid_prisional = " . $params['fk_unid_prisional'];
         $conn = new Connection();
         return json_encode(
             $conn->get($sql)
@@ -32,7 +33,8 @@ class Pavilhao
 
     public function blocos($params)
     {
-        $sql = "SELECT * FROM bloco WHERE fk_pavilhao = " . $params['id_pavilhao'];
+        $sql = "SELECT * FROM bloco WHERE fk_numero_pavilhao = " . $params['fk_numero_pavilhao'] . 
+               " AND fk_codigo_unidade = " . $params['fk_codigo_unidade'];
         $conn = new Connection();
         return json_encode(
             $conn->get($sql)
@@ -47,8 +49,8 @@ class Pavilhao
                 "numero, " .
                 "funcao" .
             ") VALUES(" .
-                "'" . $params['fk_unid_prisional'] . "', " .
-                "'" . $params['numero'] . "', " .
+                "" . $params['fk_unid_prisional'] . ", " .
+                "" . $params['numero'] . ", " .
                 "'" . $params['funcao'] . "'" .
             ")";
 
@@ -64,14 +66,14 @@ class Pavilhao
         
         $array_values = [];
         foreach ($params as $key => $value) {
-            if ($key != 'id_pavilhao') {
+            if ($key != 'numero' && $key != 'fk_unid_prisional') {
                 $array_values[] = $key."=".(in_array($key, self::$text) ? "'".$value."'" : $value);
             }
         }
         
         $values = implode(',', $array_values);
-        $sql .= $values . " WHERE id_pavilhao = ";
-        $sql .= $params['id_pavilhao'];
+        $sql .= $values . " WHERE numero = " . $params['numero'] .
+        " AND fk_unid_prisional = " . $params['fk_unid_prisional'];
 
         $conn = new Connection();
         return json_encode(
@@ -81,7 +83,8 @@ class Pavilhao
 
     public function remover($params)
     {
-        $sql = "delete from pavilhao where id_pavilhao = " . $params['id_pavilhao'];
+        $sql = "delete from pavilhao where numero = " . $params['numero'] . 
+               " AND fk_unid_prisional = " . $params['fk_unid_prisional'];
 
         $conn = new Connection();
         return json_encode(
